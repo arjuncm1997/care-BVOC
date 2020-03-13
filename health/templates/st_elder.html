@@ -1,0 +1,68 @@
+{%extends 's_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-color:black;
+  text-align: left;
+  background-color:rgb(14, 3, 3);
+  color: white;
+}
+</style>
+</head>
+<body>
+<center>
+<table id="customers" style="width: 800px;">
+  <tr>
+    <th>Id</th>
+    <th>Userid</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>Mobilenoofguardian</th>
+    <th>Guardianname</th>
+  </tr>
+  <tbody>
+    {%for x in x %}
+    <tr role="row" class="odd">
+    <td>{{x.id}}</td>
+    <td>{{x.userid}}</td>
+    <td>{{x.name}}</td>
+    <td>{{x.age}}</td>
+    <td>{{x.gender}}</td>
+    <td>{{x.mobilenoofguardian}}</td>
+    <td>{{x.guardianname}}</td>
+     </tr>
+     {%endfor%}
+    </tbody>
+  
+</table>
+</center>
+</body>
+</html>
+<br>
+<br>
+{%endblock%}

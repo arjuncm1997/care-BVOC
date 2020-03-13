@@ -1,0 +1,110 @@
+{%extends 'd_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+	<div class="row">
+	<div class="modal-content" style="width: 800px; margin-left: 154px;">
+
+    					<div class="modal-header">
+							<h4 class="modal-title">Edit Details</h4>
+						</div>
+
+						<form action="" method="POST">
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="user">Name</label>
+									<input type="text" class="form-control" name="name" value="{{det.name}}">
+									<span class="help-block"></span>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="password">Age</label>
+											<input type="text" class="form-control"  name="age" value="{{det.age}}">
+											<span class="help-block"></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="passwordr">Checking date</label>
+											<input type="date" class="form-control" name="date" value="{{det.checkingdate}}">
+											<span class="help-block"></span>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+										<div class="form-group">
+											<label for="passwordr">Details</label>
+											<input type="text" class="form-control" name="details" value="{{det.details}}">
+											<span class="help-block"></span>
+                                        </div>
+                                       
+									</div>
+								</div>
+                                
+                            </div>
+                            
+
+							<div class="modal-footer">
+								<input type="hidden" name="isEmpty" value="">
+								<button type="input" name="submit" value="newAccount" class="btn btn-success btn-icon"><i class="fa fa-check"></i> Submitt</button>
+								
+							</div>
+						</form>
+
+					
+	</div>
+</div>
+<style>
+    .modal-content {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  outline: none;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+}
+.modal-header {
+  border-bottom: 1px solid #48a4ac;
+  background: #61bdc5;
+  min-height: 16.4286px;
+  padding: 10px 15px;
+}
+.close {
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .2;
+  filter: alpha(opacity=20);
+}
+.modal-body {
+  position: relative;
+  padding: 20px;
+}
+.modal-footer {
+  padding: 19px 20px 20px;
+  margin-top: 0;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+
+</style>
+<br>
+<br>
+{%endblock%}

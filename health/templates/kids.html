@@ -1,0 +1,101 @@
+{% extends 'u_layout.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body style="
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);">
+	<div class="container"></div>
+			<div class="main">
+			<div class="main-center" style="background: white;">
+				<h5>Take an admission</h5>
+					<form class="" action="/kids" method='POST'>
+						
+						<div class="form-group">
+							<label for="name">Kidname</label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+				<input type="text" class="form-control" name="name" id="name"  placeholder="Enter Kid Name"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email">Address</label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="add" placeholder="Enter your Address"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username">Guardian Name</label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="gname" placeholder="Enter Guardian Name"/>
+								</div>
+						</div>
+
+						<div class="form-group">
+                            <label for="gender">Mobileno</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="mobile" placeholder="Enter your MobileNo"/>
+                            </div>
+								</div>
+                        
+
+						<div class="form-group">
+							<label for="confirm">Age</label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="age" placeholder="Enter Your Age"/>
+								</div>
+                        </div>
+                       
+                                <br>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success "  value="SUBMIT">
+                                  </div>
+						
+					</form>
+				</div><!--main-center"-->
+			</div><!--main-->
+		</div><!--container-->
+		
+<style>
+    
+            .main{
+ 	padding: 40px 0;
+}
+.main input,
+.main input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 400px;
+    padding: 10px 40px;
+	
+	color: black;
+    text-shadow: none;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+
+}
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;
+}
+
+</style>
+		
+</body>
+{%endblock%}

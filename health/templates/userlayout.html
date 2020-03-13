@@ -1,0 +1,259 @@
+<html lang="zxx"><head>
+    <title>Sail-trip a Travel Category Bootstrap Responsive web Template| Home :: w3layouts</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Sail-trip Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
+    <script>
+      addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+      }, false);
+  
+      function hideURLbar() {
+        window.scrollTo(0, 1);
+      }
+    </script>
+    <!--//meta tags ends here-->
+    <!--booststrap-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap end-->
+    <!-- font-awesome icons -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!--stylesheets-->
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <!--//stylesheets-->
+    <link href="//fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+  </head>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert" style="font-size: 1.5rem;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <!-- <strong>Title</strong> --> {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <body>
+    <div class="main-top" id="home">
+      <!-- header -->
+      <div class="headder-top">
+        <!-- nav -->
+        <nav>
+          <div id="logo">
+            <h1>
+              <a href="userlayout">Sail-Trip</a>
+            </h1>
+          </div>
+          <label for="drop" class="toggle">Menu</label>
+          <input type="checkbox" id="drop">
+          <ul class="menu mt-2">
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <!-- First Tier Drop Down -->
+              <label for="drop-2" class="toggle toogle-2">dropdown
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </label>
+              <a href="#">Admission
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </a>
+              <input type="checkbox" id="drop-2">
+              <ul>
+                <li>
+                  <a href="/kids" class="drop-text">Kids</a>
+                </li>
+                <li>
+                  <a href="/elderregistration" class="drop-text">Elder</a>
+                </li>
+                <li>
+                  <a href="/member" class="drop-text">Health</a>
+                </li>
+              </ul>
+            </li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <!-- First Tier Drop Down -->
+              <label for="drop-2" class="toggle toogle-2">Dropdown
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </label>
+              <a href="#">Admission View
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </a>
+              <input type="checkbox" id="drop-2">
+              <ul>
+                <li>
+                  <a href="/us_kidadview" class="drop-text">Kids</a>
+                </li>
+                <li>
+                  <a href="/us_elderadview" class="drop-text">Elder</a>
+                </li>
+                <li>
+                  <a href="/us_memberview" class="drop-text">Health</a>
+                </li>
+              </ul>
+            </li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <a href="about.html">Chat</a>
+            </li>
+            <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+              <!-- First Tier Drop Down -->
+              <label for="drop-2" class="toggle toogle-2">dropdown
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </label>
+              <a href="#">More
+                <span class="fa fa-angle-down" aria-hidden="true"></span>
+              </a>
+              <input type="checkbox" id="drop-2">
+              <ul>
+                <li>
+                  <a href="/us_eventview" class="drop-text">Events</a>
+                </li>
+                <li>
+                  <a href="/profile" class="drop-text">Profile</a>
+                </li>
+                <li>
+                  <a href="blog.html" class="drop-text">Services</a>
+                </li>
+                <li>
+                  <a href="/donation" class="drop-text">Donation</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/u_feedback">Feedback</a>
+            </li>
+            <li>
+                <a href="/logout">Logout</a>
+              </li>
+          </ul>
+        </nav>
+        <!-- //nav -->
+      </div>
+      <!-- //header -->
+      <!-- banner -->
+      <div class="main-banner">
+        <div class="container-fluid">
+          <div class="style-banner ">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-3">
+                <div class="social-icons">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <span class="fa fa-facebook mr-lg-3"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="fa fa-twitter mr-lg-3"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="fa fa-rss mr-lg-3"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="fa fa-envelope mr-lg-3"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="fa fa-instagram mr-lg-3"></span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-9">
+                <div class="banner-right-txt">
+                  <h4>Join with us</h4>
+                   <h4>as a user</h4>
+                  <div class="two-demo-button mt-lg-4 mt-md-3 mt-3">
+                    <p> Better caring and health management</p>
+                  </div>
+                  <div class="view-buttn mt-md-4 mt-sm-4 mt-3">
+                    <a href="single.html" class="btn">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //banner -->
+    <!-- about -->
+     {%block content%}
+    
+  {%endblock%}
+    <!-- footer -->
+    <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
+      <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 footer-bottom-txt">
+            <h2>
+              <a href="index.html">Sail-Trip</a>
+            </h2>
+            <p class="pt-lg-4 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            </p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 footer-bottom-txt">
+            <div class="footer-icons pt-lg-5 pt-md-4 mt-3">
+              <ul>
+                <li>
+                  <a href="#">
+                    <span class="fa fa-facebook mr-lg-3 mr-2"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="fa fa-twitter mr-lg-3 mr-2"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="fa fa-rss mr-lg-3 mr-2"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="fa fa-envelope mr-lg-3 mr-2"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="fa fa-instagram mr-lg-3 mr-2"></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- move icon -->
+        <div class="text-center">
+          <a href="#home" class="move-top text-center mt-3">
+            <span class="fa fa-arrow-up" aria-hidden="true"></span>
+          </a>
+        </div>
+        <!--//move icon -->
+      </div>
+    </footer>
+    <!--//footer -->
+    <!-- footer-copy-write -->
+    <div class="footer-copy-write py-3">
+      <div class="container py-2">
+        <div class="bottem-txt-footer text-center">
+          <p>
+            © 2019 Sail-Trip . All Rights Reserved | Design by
+            <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--//footer-copy-write -->
+  
+  </body></html>

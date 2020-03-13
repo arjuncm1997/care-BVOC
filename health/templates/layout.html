@@ -1,0 +1,185 @@
+<html lang="zxx">
+  <head>
+  <title>Livelihood a Travel Category Bootstrap Responsive web Template|about :: w3layouts</title>
+  <!--meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Livelihood Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+      Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
+  <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+  </script>
+  <!--//meta tags ends here-->
+  <!--booststrap-->
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+  <!--//booststrap end-->
+  <!-- font-awesome icons -->
+  <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+  <!-- //font-awesome icons -->
+  <!--stylesheets-->
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <!--//stylesheets-->
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <!--//stylesheets-->
+  
+
+ 
+</head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+<!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+{% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }} alert-dismissible" role="alert" style="font-size: 1.5rem;">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <!-- <strong>Title</strong> --> {{ message }}
+  </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<body>
+  
+  <!--headder-->
+  <div class="header-outs inner_page-banner " id="home">
+    
+    <div class="headder-top">
+      <!-- nav -->
+      <nav>
+        <div id="logo">
+          <h1>
+            <a href="/">Health&Care</a>
+          </h1>
+        </div>
+        <label for="drop" class="toggle">Menu</label>
+        <input type="checkbox" id="drop">
+        <ul class="menu mt-2">
+          <li class="active">
+            <a href="/">Home</a>
+          </li>
+          <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+            <a href="about.html">About</a>
+          </li>
+          <li>
+            <a href="/gallery">Gallery</a>
+          </li>
+          <li>
+            <a href="service.html">Services</a>
+          </li>
+          
+          <li class="mx-lg-3 mx-md-2 my-md-0 my-1">
+            <!-- First Tier Drop Down -->
+            <label for="drop-2" class="toggle toogle-2">Dropdown
+              <span class="fa fa-angle-down" aria-hidden="true"></span>
+            </label>
+            <a href="">More
+              <span class="fa fa-angle-down" aria-hidden="true"></span>
+            </a>
+            <input type="checkbox" id="drop-2">
+            <ul>
+             <li>
+                <a href="/registration" class="drop-text">Register</a>
+              </li>
+              <li>
+                <a href="/signin" class="drop-text">Login</a>
+              </li>
+              <li>
+                <a href="/mycontact" class="drop-text">Contact Us</a>
+              </li>
+            </ul>
+          </li>
+          
+          
+        </ul>
+      </nav>
+      <!-- //nav -->
+    </div>
+    <!-- short -->
+    
+    <!-- //short-->
+
+  
+  <!-- //header -->
+  <!--single page-->
+  
+  <!--//single page-->
+  <!-- footer -->
+
+  {%block content%}
+
+</div>
+
+  <br><br>
+  <br><br>
+  <br><br>
+  {%endblock%}
+  <footer class="py-lg-3 py-md-2 py-sm-3 py-2">
+    <div class="container py-lg-4 py-md-4 py-sm-3 py-3">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 footer-bottom-txt">
+          <h2>
+            <a href="index.html">Health&Care</a>
+          </h2>
+          <p class="pt-lg-4 pt-3">When the heart is at ease,the body is healthy
+          </p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 footer-bottom-txt">
+          <div class="footer-icons pt-lg-5 pt-md-4 mt-3">
+            <ul>
+              <li>
+                <a href="#">
+                  <span class="fa fa-facebook mr-lg-3 mr-2"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-twitter mr-lg-3 mr-2"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-rss mr-lg-3 mr-2"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-envelope mr-lg-3 mr-2"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-instagram mr-lg-3 mr-2"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- move icon -->
+      <div class="text-center">
+        <a href="#home" class="move-top text-center mt-3">
+          <span class="fa fa-arrow-up" aria-hidden="true"></span>
+        </a>
+      </div>
+      <!--//move icon -->
+    </div>
+  </footer>
+  <!--//footer -->
+  <!-- footer-copy-write -->
+  <div class="footer-copy-write py-3">
+    <div class="container py-2">
+      <div class="bottem-txt-footer text-center">
+        <p>
+          © 2020 Health&Care . All Rights Reserved | Design by
+          <a href="http://www.W3Layouts.com" target="_blank">AHISHA M G</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--//footer-copy-write -->
+
+</body></html>

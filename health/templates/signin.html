@@ -1,0 +1,87 @@
+{%extends 'layout.html'%}
+{%block content%}
+
+<br>
+<br>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="login-box">
+    <form id="loginForm" action="" method="POST">
+		{{ form.hidden_tag() }}
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Sign in</b> <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span></div>
+			<div class="panel-body">
+				<div class="form-group has-primary has-feedback">
+					<label class="control-label" for="login">Email <span class="regForm text-danger">*</span></label>
+                                    {% if form.email.errors %}
+                                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.email(class="form-control form-control-lg") }}
+                                    {% endif %}
+					<span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
+				</div>
+				<div class="form-group has-primary has-feedback">
+					<label class="control-label" for="password">Password <span class="regForm text-danger">*</span></label>
+                                    {% if form.password.errors %}
+                                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.password.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.password(class="form-control form-control-lg") }}
+                                    {% endif %}
+					<span class="glyphicon glyphicon-lock form-control-feedback" aria-hidden="true"></span>
+				</div>
+				<div class="form-group has-primary has-feedback">
+					{{ form.remember(class="form-check-input") }}
+					{{ form.remember.label(class="form-check-label") }}
+				</div>
+			</div>
+			<div class="panel-footer">
+				<input type="submit" class="btn btn-success" id="goToChat" value="Sign in" />
+				<a href="/registration" class="btn btn-warning pull-right">Registration</a>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="text-center">
+<a href="#">Require password?</a>
+</div>
+</div>
+<style>
+    body {
+		
+		background: #3a6186; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left,white,grey); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left,white,grey);
+            }
+    .login-box{
+    margin:6% auto 0;
+	width:300px;
+    background: grey; 
+	-moz-box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+	-o-box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+	-ms-box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 1px rgba(0,0,0,0.2);
+}
+.login-box .panel-heading span{
+	color:#aaa;
+	font-size:14px
+}
+.form-check-label {
+    margin-left: 15px;
+}
+</style>
+<br>
+<br>
+{%endblock%}

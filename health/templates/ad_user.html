@@ -1,0 +1,50 @@
+
+{%extends 'ad_layout.html'%}
+{%block content%}
+
+<div class="col-12" style="    left: 267px;
+max-width: 74%;">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Users</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
+        <table id="example2" class="table table-bordered table-hover dataTable css-serial" role="grid" aria-describedby="example2_info">
+        <thead>
+        <tr role="row">
+          <th>No:</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Name</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Email</th>
+         </tr>
+        </thead>
+        <tbody>
+          {% for user in user %}
+          <tr role="row" class="odd">
+          <td ></td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </table></div></div></div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+</div>
+
+<style>
+
+  .css-serial {
+        counter-reset: serial-number;  /* Set the serial number counter to 0 */
+      }
+      
+      .css-serial td:first-child:before {
+        counter-increment: serial-number;  /* Increment the serial number counter */
+        content: counter(serial-number);  /* Display the counter */
+      }
+      
+  </style>
+{%endblock%}
+

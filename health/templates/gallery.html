@@ -1,0 +1,40 @@
+{%extends 'layout.html'%}
+{%block content%}
+
+<section class="gallery py-lg-4 py-md-3 py-sm-3 py-3" id="gallery">
+         
+  <div class="py-lg-5 py-md-5 py-sm-4 py-3">
+     <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Our Gallery</h3>
+<center>
+     <div class="galler-imgs" style="width: 1017px;">
+
+  
+        <ul class="portfolio-area">
+            {% for g in g %}
+           <li class="portfolio-item2" data-id="id-0" data-type="cat-item-1">
+              <div>
+                 <span class="image-block">
+                    <a class="image-zoom" href="../static/pics/{{g.img}}" rel="prettyPhoto[gallery]" style="height: 250px;width: 335px;">
+                       <figure>
+                          <img src="../static/pics//{{g.img}}" class="img-fluid" alt="" style="height: 250px;width: 335px;">
+                          <figcaption>
+                             <h3></h3>
+                          </figcaption>
+                       </figure>
+                    </a>
+                 </span>
+              </div>
+           </li>
+         
+            {% endfor %}
+           <div class="clearfix"></div>
+       
+        </ul>
+      
+     </div>      
+    </center>
+  </div>
+
+</section>
+
+{%endblock%}

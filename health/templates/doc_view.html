@@ -1,0 +1,67 @@
+{%extends 'd_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-color:black;
+  text-align: left;
+  background-color:black;
+  color: white;
+}
+</style>
+</head>
+<body>
+<center>
+<table id="customers" style="width:800px">
+  <tr>
+    
+    <th>Name</th>
+    <th>Age</th>
+    <th>Cheking Date</th>
+    <th>Details</th>
+    <th></th>
+  </tr>
+  <tbody>
+    {%for s in s %}
+    <tr role="row" class="odd">
+    <td>{{s.name}}</td>
+    <td>{{s.age}}</td>
+    <td>{{s.checkingdate}}</td>
+    <td>{{s.details}}</td>
+    <td>
+        <a href="/doc_editdetails/{{s.id}}"><button style="color: red;">Edit</button></a>
+        <a href="/docdel/{{s.id}}"><button style="color: green;">Delete</button></a>
+    </td>
+     </tr>
+     {%endfor%}</tbody>
+  
+</table>
+</center>
+</body>
+</html>
+<br>
+<br>
+{%endblock%}

@@ -1,0 +1,68 @@
+{%extends 's_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-color:black;
+  text-align: left;
+  background-color:rgb(14, 3, 3);
+  color: white;
+}
+</style>
+</head>
+<body>
+<center>
+<table id="customers" style="width: 800px;">
+  <tr>
+    <th>Id</th>
+    <th>Kidname</th>
+    <th>Address</th>
+    <th>Guardianname</th>
+    <th>Mobileno</th>
+    <th>Age</th>
+  </tr>
+  <tbody>
+    {%for a in a %}
+    <tr role="row" class="odd">
+    <td>{{a.id}}</td>
+    <td>{{a.kidname}}</td>
+    <td>{{a.address}}</td>
+    <td>{{a.guadianname}}</td>
+    <td>{{a.mobileno}}</td>
+    <td>{{a.age}}</td>
+    
+
+     </tr>
+     {%endfor%}
+    </tbody>
+  
+</table>
+</center>
+</body>
+</html>
+<br>
+<br>
+{%endblock%}

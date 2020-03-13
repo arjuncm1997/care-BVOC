@@ -1,0 +1,67 @@
+{%extends 'u_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+   
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-color:black;
+  text-align: left;
+  background-color:rgb(19, 1, 1);
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<table id="customers" style="margin-left: 140px;">
+  <tr>
+    
+    <th>Kidname</th>
+    <th>Address</th>
+    <th>Guardianname</th>
+    <th>Mobile no</th>
+    <th>Age</th>
+    <th>status</th>
+  </tr>
+  <tbody>
+    {% for s in s %}
+    <tr role="row" class="odd">
+    <td>{{s.kidname}}</td>
+    <td>{{s.kidname}}</td>
+    <td>{{s.guadianname}}</td>
+    <td>{{s.mobileno}}</td>
+    <td>{{s.age}}</td>
+    <td>{{s.status}}</td>
+     </tr>
+     {%endfor%}</tbody>
+  
+</table>
+
+</body>
+</html>
+<br>
+<br>
+{%endblock%}

@@ -1,0 +1,62 @@
+{%extends 'u_layout.html'%}
+{%block content%}
+<br>
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-color:black;
+  text-align: left;
+  background-color:black;
+  color: white;
+}
+</style>
+</head>
+<body>
+<center>
+<table id="customers" style="width:800px">
+  <tr>
+    
+    <th>Eventname</th>
+    <th>Eventdate</th>
+    <th>Eventtime</th>
+    <th>Eventtype</th>
+  </tr>
+  <tbody>
+    {%for s in s %}
+    <tr role="row" class="odd">
+    <td>{{s.eventname}}</td>
+    <td>{{s.eventdate}}</td>
+    <td>{{s.eventtime}}</td>
+    <td>{{s.eventtype}}</td>
+     </tr>
+     {%endfor%}</tbody>
+  
+</table>
+</center>
+</body>
+</html>
+<br>
+<br>
+{%endblock%}

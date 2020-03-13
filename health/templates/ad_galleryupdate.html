@@ -1,0 +1,46 @@
+{%extends 'ad_layout.html'%}
+{%block content%}
+<div class="card card-primary" style="    width: 606px;
+left: 313px;">
+    <div class="card-header"style="background-color: #20c997;">
+    <h3 class="card-title">Add Image</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form action="" method='POST' role="form" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+      <div class="card-body">
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+
+        {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.name(class="form-control form-control-lg") }}
+        {% endif %}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputAge">Upload Image</label>
+            {{ form.pic(class="form-control-file") }}
+            {% if form.pic.errors %}
+                {% for error in form.pic.errors %}
+                    <span>{{ error }}</span></br>
+                {% endfor %}
+            {% endif %}
+          </div>
+          
+        
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary"style="background-color: #20c997;    border-color: #28a745;">Submit</button>
+      </div>
+    </form>
+  </div>
+  {%endblock%}

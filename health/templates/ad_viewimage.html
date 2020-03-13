@@ -1,0 +1,51 @@
+{%extends 'ad_layout.html'%}
+{%block content%}
+
+<div class="col-12" style="    left: 267px;
+max-width: 74%;">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        Staff Details</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+        <thead>
+        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Name</th>
+            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Image</th>
+            <th style="width: 176px;"></th>
+        </tr>
+        </thead>
+        <tbody>
+          {%for d in d %}
+          <tr role="row" class="odd">
+          <td class="sorting_1">{{d.id}}</td>
+          <td>{{d.name}}</td>
+          <td><span class="image-block">
+            <a class="image-zoom" href="static/pics/{{d.img}}" rel="prettyPhoto[gallery]" style="height: 250px;width: 335px;">
+               <figure>
+                  <img src="static/pics/{{d.img}}" class="img-fluid" alt="" style="height: 50px;width: 50px;">
+                  <figcaption>
+                     
+                  </figcaption>
+               </figure>
+            </a>
+         </span></td>
+         <td>
+             <a href="/ad_galleryupdate/{{d.id}}"><button style="color: green;">Edit</button></a>
+             <a href="/delimage/{{d.id}}"><button style="color: red;">Delete</button></a>
+         </td>
+          </tr>
+           {%endfor%}
+        </tbody>
+        <tfoot>
+    
+        </tfoot>
+      </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite"></div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"></div></div></div></div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+</div>
+{%endblock%}

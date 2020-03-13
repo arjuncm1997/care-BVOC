@@ -1,0 +1,6 @@
+{
+    "files.watcherExclude": {
+        "CD": true
+    },
+    "python.pythonPath": "env\\Scripts\\python.exe"
+}
