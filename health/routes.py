@@ -11,6 +11,7 @@ from health.forms import *
 from random import randint
 from PIL import Image
 from flask_mail import Message
+from datetime import datetime, date
 
 @app.route('/')
 def p_layout():
@@ -643,10 +644,60 @@ def save_picture(form_picture):
     return picture_fn
 
 
+@app.route('/uchat/<int:id>', methods=['GET', 'POST'])
+def uchat(id):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print("Current Time =", current_time)
+    today = date.today()
+    print("Today's date:", today)
+    staffid = id
+    chat = Chat.query.filter_by(userid = current_user.id, staffid = staffid).all()
+    if request.method == 'POST':
+        msg =request.form['message']
+        chat1 = Chat(userid =current_user.id,staffid = staffid,message=msg, sid = current_user.id, rid =staffid,date =today, time =  current_time )
+        try:
+            db.session.add(chat1)
+            db.session.commit()
+            return redirect("")
+        except Exception as e:
+            print(e)
+    return render_template("uchat.html",chat=chat)
+
+@app.route('/u_chatselect')
+def u_chatselect():
+    user = Login.query.filter_by(usertype='staff').all()
+    return render_template("u_chatselect.html",user=user)
+
+@app.route('/st_chatselect')
+def st_chatselect():
+    user = Login.query.filter_by(usertype='user').all()
+    chat = Chat.query.all()
+    return render_template("st_chatselect.html",user=user,chat=chat)
 
 
-
-
+@app.route('/stchat/<int:id>', methods=['GET', 'POST'])
+def stchat(id):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print("Current Time =", current_time)
+    today = date.today()
+    print("Today's date:", today)
+    userid = id
+    print(userid)
+    sta = current_user.id
+    print(sta)
+    chat = Chat.query.filter_by(userid = userid, staffid = current_user.id).all()
+    if request.method == 'POST':
+        msg =request.form['message']
+        chat1 = Chat(userid =userid,staffid = current_user.id,message=msg, sid = current_user.id, rid =userid, date =today, time =  current_time )
+        try:
+            db.session.add(chat1)
+            db.session.commit()
+            return redirect("")
+        except Exception as e:
+            print(e)
+    return render_template("stchat.html",chat=chat)
 
 
 

@@ -153,5 +153,13 @@ class Gallery(db.Model):
     img = db.Column(db.String(20), nullable=False, default='default.jpg')  
     
     
-
-    
+class Chat(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    userid=db.Column(db.String)
+    staffid=db.Column(db.String)
+    message=db.Column(db.String(200))
+    sid=db.Column(db.String)
+    rid=db.Column(db.String)
+    date = db.Column(db.String)
+    time = db.Column(db.String)
+    status=db.Column(db.String)
