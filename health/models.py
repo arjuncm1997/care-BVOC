@@ -25,7 +25,6 @@ class Adddocter(db.Model):
     specilizedarea=db.Column(db.String)
     doctertype=db.Column(db.String)
     email=db.Column(db.String)
-    password=db.Column(db.String)
     img=db.Column(db.String(30),nullable=False,default="default.jpg")
 
 
@@ -37,7 +36,6 @@ class Addstaff(db.Model):
     qualification=db.Column(db.String)
     experience=db.Column(db.String)
     email=db.Column(db.String)
-    password=db.Column(db.String)
     img=db.Column(db.String(30),nullable=False,default="img.jpg")
 
 
@@ -68,7 +66,6 @@ class Registration(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     email=db.Column(db.String)
     username=db.Column(db.String)
-    password=db.Column(db.String)
     
 
 
@@ -81,8 +78,10 @@ class Addelder(db.Model):
     mobilenoofguardian=db.Column(db.Integer)
     guardianname=db.Column(db.String)
     img=db.Column(db.String(30),nullable=False,default="img2.jpg")
-
-
+    amount = db.Column(db.String)
+    payment = db.Column(db.String)
+    paymentstatus = db.Column(db.String)
+    
 class Donation(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     name=db.Column(db.String(200))
@@ -100,12 +99,6 @@ class Schedule(db.Model):
     date=db.Column(db.Date)
 
 
-class Payment(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(200))
-    section=db.Column(db.String(200))
-    amount=db.Column(db.Integer)
-    paymenttype=db.Column(db.String)
 
 
 class Patientdetails(db.Model):
@@ -127,7 +120,9 @@ class Kids(db.Model):
     age=db.Column(db.Integer)
     img=db.Column(db.String(30),nullable=False,default="img5.jpg")
     status=db.Column(db.String)
-
+    amount = db.Column(db.String)
+    payment = db.Column(db.String)
+    paymentstatus = db.Column(db.String)
 
 class Member(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -137,6 +132,9 @@ class Member(db.Model):
     course=db.Column(db.String)
     time=db.Column(db.Integer)
     img=db.Column(db.String(30),nullable=False,default="img7.jpg")
+    amount = db.Column(db.String)
+    payment = db.Column(db.String)
+    paymentstatus = db.Column(db.String)
 
 class Daily(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -163,3 +161,27 @@ class Chat(db.Model):
     date = db.Column(db.String)
     time = db.Column(db.String)
     status=db.Column(db.String)
+
+
+class Credit(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    userid = db.Column(db.String)
+    admission = db.Column(db.String)
+    admissionid = db.Column(db.String)
+    name = db.Column(db.String(200))
+    card = db.Column(db.String(200))
+    cvv = db.Column(db.String(200))
+    expdate = db.Column(db.String(200))
+    amount = db.Column(db.String(200))
+
+
+class Pay(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    userid = db.Column(db.String)
+    admission = db.Column(db.String)
+    admissionid = db.Column(db.String)
+    name = db.Column(db.String(200))
+    card = db.Column(db.String(200))
+    cvv = db.Column(db.String(200))
+    validdate = db.Column(db.String(200))
+    amount = db.Column(db.String(200))

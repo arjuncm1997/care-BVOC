@@ -18,7 +18,8 @@ max-width: 74%;">
             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Specilizedarea</th>
             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Doctertype</th>
             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Email</th>
-            </tr>
+            <th></th>  
+          </tr>
         </thead>
         <tbody>
           {%for c in c %}
@@ -30,6 +31,7 @@ max-width: 74%;">
           <td>{{c.specilizedarea}}</td>
           <td>{{c.doctertype}}</td>
           <td>{{c.email}}</td>
+          <td><a href="/ad_docteredit/{{c.id}}" ><button style="color: red;">Edit</button></a>  <a href="/docterdelete/{{c.id}}"><button style="color: green;"> Del</button></a></td>
           </tr>
            {%endfor%}
         </tbody>

@@ -53,6 +53,7 @@ def d_feedback():
         try:
             db.session.add(feed)
             db.session.commit()
+            flash('Feedback succsesfully','succses')
             return redirect('/d_feedback')
         except:
               return 'error'
@@ -95,7 +96,7 @@ def reg():
     form = RegistrationForm()
     if form.validate_on_submit():
         hash=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user=Registration(email=form.email.data,username=form.username.data,password=hash)
+        user=Registration(email=form.email.data,username=form.username.data)
         user1=Login(username=form.username.data,email=form.email.data,password=hash,usertype='user')
         try:
             db.session.add(user)
@@ -141,9 +142,7 @@ def memberview():
 def profile():
     return render_template('profile.html')
     
-@app.route('/payment')
-def payment():
-    return render_template('payment.html')
+
 
 
 
@@ -179,7 +178,7 @@ def elder():
         try:
             db.session.add(elder)
             db.session.commit()
-            return redirect('/elderregistration')
+            return redirect('/us_elderamount/'+str(elder.id))
         except:
             return 'error'
 
@@ -199,7 +198,8 @@ def kid():
         try:
             db.session.add(adm)
             db.session.commit()
-            return redirect('/payment')
+            print(adm.id)
+            return redirect('/us_amount/'+str(adm.id))
         except:
             return 'error'
 
@@ -217,7 +217,7 @@ def mem():
         try:
             db.session.add(mem)
             db.session.commit()
-            return redirect('/payment')
+            return redirect('/us_healthamount/'+str(mem.id))
         except:
             return 'error'
 
@@ -304,6 +304,48 @@ def kidreject(id):
     db.session.commit()
     return redirect('/ad_kidview')
 
+@app.route('/ad_elderview')
+def ad_elderview():
+    t = Addelder.query.all()
+    return render_template('ad_elderview.html',t=t)
+
+@app.route('/elderapprove/<int:id>')
+def elderapprove(id):
+    t = Addelder.query.get_or_404(id)
+    t.status = 'approved'
+    db.session.commit()
+    return redirect('/ad_elderview')
+
+
+@app.route('/elderreject/<int:id>')
+def elderreject(id):
+    t = Addelder.query.get_or_404(id)
+    t.status = 'rejected'
+    db.session.commit()
+    return redirect('/ad_elderview')
+
+
+@app.route('/ad_healthview')
+def ad_healthview():
+    t = Member.query.all()
+    return render_template('ad_healthview.html',t=t)
+
+@app.route('/healthapprove/<int:id>')
+def healthapprove(id):
+    t = Member.query.get_or_404(id)
+    t.status = 'approved'
+    db.session.commit()
+    return redirect('/ad_healthview')
+
+
+@app.route('/healthreject/<int:id>')
+def healthreject(id):
+    t = Member.query.get_or_404(id)
+    t.status = 'rejected'
+    db.session.commit()
+    return redirect('/ad_healthview')
+
+
 @app.route('/ad_viewcontp')
 def ad_viewcontp():
     a = Contact.query.filter_by(usertype='public').all()
@@ -326,21 +368,17 @@ def ad_viewcontu():
 
 @app.route('/ad_staff',methods=['POST','GET'])
 def viewstaff():
-    if request.method =='POST':
-        a=request.form['name']
-        b=request.form['age']
-        c=request.form['add']
-        d = request.form['quali']
-        ex = request.form['experi']
-        e= request.form['email']
+    form = StaffForm()
+    if form.validate_on_submit():
         def randomString(stringLength=10):
             letters= string.ascii_lowercase
             return ''.join(random.choice(letters) for i in range(stringLength))
         f = randomString()
         print(f)
         hash=bcrypt.generate_password_hash(f).decode('utf-8')
-        staff=Addstaff(name=a,age=b,address=c,qualification=d,experience=ex,email=e,password=hash)
-        staff1=Login(username=a,email=e,password=hash,usertype='staff')
+        e =form.email.data
+        staff=Addstaff(name=form.name.data,age=form.age.data,address=form.add.data,qualification=form.quali.data,experience=form.exp.data,email=form.email.data)
+        staff1=Login(username=form.name.data,email=form.email.data,password=hash,usertype='staff')
         try:
             db.session.add(staff)
             db.session.add(staff1)
@@ -351,8 +389,7 @@ def viewstaff():
         except:
             return 'error'
 
-    return render_template('ad_staff.html')
-
+    return render_template('ad_staff.html', form = form)
 
 def staffadd(f,e):
     msg = Message('Approved',
@@ -360,34 +397,72 @@ def staffadd(f,e):
     msg.body = f''' Your email : {e} and Password: {f} '''
     mail.send(msg) 
 
+@app.route('/ad_staffedit/<int:id>',methods=['POST','GET'])
+def ad_staffedit(id):
+    form = StaffeditForm()
+    staff = Addstaff.query.get_or_404(id)
+    stafflogin = Login.query.filter_by(email = staff.email).first()
+    staffid = stafflogin.id
+    staffpro = Login.query.get_or_404(staffid)
+    if form.validate_on_submit():
+        staff.name = form.name.data
+        staff.age=form.age.data
+        staff.address=form.add.data
+        staff.qualification=form.quali.data
+        staff.experience=form.exp.data
+        staff.email=form.email.data
+        staffpro.username = form.name.data
+        staffpro.email=form.email.data
+        db.session.commit()
+        flash('updated succsessfully', 'success')
+        return redirect('/ad_viewst')
+    elif request.method == 'GET':
+        form.name.data = staff.name
+        form.age.data = staff.age
+        form.add.data = staff.address
+        form.quali.data = staff.qualification
+        form.exp.data = staff.experience
+        form.email.data = staff.email
+    return render_template('ad_staff.html', form = form)
+
+
+@app.route('/staffdelete/<int:id>')
+def staffdelete(id):
+    delete = Addstaff.query.get_or_404(id)
+    stafflogin = Login.query.filter_by(email = delete.email).first()
+    staffid = stafflogin.id
+    staffpro = Login.query.get_or_404(staffid)
+    db.session.delete(delete)
+    db.session.delete(staffpro)
+    db.session.commit()
+    flash('Deleted successfully','danger')
+    return redirect('/ad_viewst')
 
 @app.route('/ad_docter',methods=['POST','GET'])
 def adddocter():
-    if request.method =='POST':
-        n = request.form['name']
-        a = request.form['age']
-        q = request.form['qua']
-        s = request.form['spe']
-        d = request.form['doc']
-        e = request.form['email']
+    form = DocterForm()
+    if form.validate_on_submit():
+        
         def randomString(stringLength=10):
             letters= string.ascii_lowercase
             return ''.join(random.choice(letters) for i in range(stringLength))
         f = randomString()
         print(f)
         hash=bcrypt.generate_password_hash(f).decode('utf-8')
-        docter=Adddocter(name=n,age=a,Qualification=q,specilizedarea=s,doctertype=d,email=e,password=hash)
-        doc=Login(username=n,email=e,password=hash,usertype='doctor')
+        e=form.email.data
+        docter=Adddocter(name=form.name.data,age=form.age.data,Qualification=form.quali.data,specilizedarea=form.speci.data,doctertype=form.doctype.data,email=form.email.data)
+        doc=Login(username=form.name.data,email=form.email.data,password=hash,usertype='doctor')
         try:
             db.session.add(docter)
             db.session.add(doc)
             db.session.commit()
             docteradd(f,e)
+            flash('Send an email to Docter', 'success')
             return redirect('/ad_docter')
         except:
             return 'error'
 
-    return render_template('ad_docter.html')
+    return render_template('ad_docter.html', form =form)
 
 
 def docteradd(f,e):
@@ -396,15 +471,53 @@ def docteradd(f,e):
     msg.body = f''' Your email : {e} and Password: {f} '''
     mail.send(msg) 
 
+@app.route('/ad_docteredit/<int:id>',methods=['POST','GET'])
+def ad_docteredit(id):
+    form = DoctereditForm()
+    docter = Adddocter.query.get_or_404(id)
+    docterpro = Login.query.filter_by(email=docter.email).first()
+    docterid = docterpro.id
+    doc = Login.query.get_or_404(docterid)
+    if form.validate_on_submit():
+        docter.name=form.name.data
+        docter.age=form.age.data
+        docter.Qualification=form.quali.data
+        docter.specilizedarea=form.speci.data
+        docter.doctertype=form.doctype.data
+        docter.email=form.email.data
+        doc.username = form.name.data
+        doc.email = form.email.data
+        db.session.commit()
+        flash('updated succsessfully...','success')
+        return redirect('/ad_viewdoc')
+    elif request.method == 'GET':
+        form.name.data = docter.name
+        form.age.data = docter.age
+        form.quali.data = docter.Qualification
+        form.speci.data = docter.specilizedarea
+        form.doctype.data = docter.doctertype
+        form.email.data = docter.email
+    return render_template('ad_docter.html', form =form)
+
+
+@app.route('/docterdelete/<int:id>')
+def docterdelete(id):
+    delete = Adddocter.query.get_or_404(id)
+    docterlogin = Login.query.filter_by(email = delete.email).first()
+    docterid = docterlogin.id
+    docterpro = Login.query.get_or_404(docterid)
+    db.session.delete(delete)
+    db.session.delete(docterpro)
+    db.session.commit()
+    flash('Deleted successfully','danger')
+    return redirect('/ad_viewdoc')
+
 
 @app.route('/ad_viewdoc')
 def viewdoc():
     c = Adddocter.query.all()
     return render_template('ad_viewdoc.html',c=c)
 
-@app.route('/ad_admission')
-def addadmi():
-    return render_template('ad_admission.html')
 
 
 @app.route('/ad_user')
@@ -517,15 +630,40 @@ def events():
             db.session.add(adf)
             db.session.commit()
             print('adf')
-            return redirect('/addevent')
+            return redirect('/st_eventview')
         except:
             return 'error'
     return render_template("addevent.html", staff = staff)
 
 
-###########################################Docter#######################################
+@app.route('/editevent/<int:id>',methods=['POST','GET'])
+def editevent(id):
+    event = Addevent.query.get_or_404(id)
+    staff=""
+    staff1 = ""
+    e = current_user.email
+    staff = Addstaff.query.filter_by(email = e).first()
+    print(staff)
+    if request.method =='POST':
+        event.eventname = request.form['evname']
+        event.eventdate = request.form['date']
+        event.eventtime = request.form['time']
+        event.eventtype = request.form['type']
+        try:
+            db.session.commit()
+            print('adf')
+            return redirect('/st_eventview')
+        except:
+            return 'error'
+    return render_template("editevent.html", staff = staff, event= event)
 
-
+@app.route('/delevent/<int:id>')
+def delevent(id):
+    event = Addevent.query.get_or_404(id)
+    db.session.delete(event)
+    db.session.commit()
+    flash ('Event Deleted ....')
+    return redirect('/st_eventview')
 
 
 @app.route('/docter_layout')
@@ -558,6 +696,7 @@ def doc_adddetails():
         try:
             db.session.add(details)
             db.session.commit()
+            flash('Details addedd successfully..','success')
             return redirect('/doc_adddetails')
         except:
             return 'error'
@@ -574,7 +713,7 @@ def doc_editdetails(id):
         det.checkingdate =request.form['date']
         det.details =request.form['details']
         db.session.commit()
-        flash('not update details','danger')
+        flash('updated details successfully','success')
         return redirect('/doc_view')
     return render_template('doc_editdetails.html',det=det)
 
@@ -701,4 +840,194 @@ def stchat(id):
 
 
 
+@app.route('/us_payment/<int:id>')
+def us_payment(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Kids.query.get_or_404(id)
+    return render_template('us_payment.html',user=user,form1 =form1,form2=form2)
 
+
+@app.route('/creditcard/<int:id>',methods = ['GET','POST'])
+@login_required
+def creditcard(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Kids.query.get_or_404(id)
+    admission = 'kid'
+    if form1.validate_on_submit():
+        user.payment = 'credit card'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form1.validate_on_submit():
+        credit = Credit(userid = current_user.id,admission='kid',admissionid=user.id,name = form1.name.data,card= form1.number.data ,cvv=form1.cvv.data , expdate=form1.date.data,amount = user.amount)
+        db.session.add(credit)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_payment.html',form1 =form1,form2=form2)
+
+@app.route('/paypal/<int:id>',methods = ['GET','POST'])
+@login_required
+def paypal(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Kids.query.get_or_404(id)
+    admission = 'kid'
+    if form2.validate_on_submit():
+        user.payment = 'paypal'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form2.validate_on_submit():
+        pay = Pay(userid = current_user.id,admission='kid',admissionid=user.id,name = form2.name.data,card= form2.number.data ,cvv=form2.cvv.data , validdate=form2.date.data,amount = user.amount)
+        db.session.add(pay)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_payment.html',form1 =form1,form2=form2)
+
+
+@app.route('/us_amount/<int:id>',methods = ['GET','POST'])
+def us_amount(id):
+    form=Amountform()
+    kid = Kids.query.get_or_404(id)
+    if form.validate_on_submit():
+        kid.amount = '1000'
+        db.session.commit()
+        return redirect('/us_payment/'+str(id))
+    elif request.method == 'GET':
+        form.amount.data = '1000'
+    return render_template("us_amount.html",form=form)
+
+
+@app.route('/us_elderamount/<int:id>',methods = ['GET','POST'])
+def us_elderamount(id):
+    form=Amountform()
+    elder = Addelder.query.get_or_404(id)
+    if form.validate_on_submit():
+        elder.amount = '1000'
+        db.session.commit()
+        return redirect('/us_elderpayment/'+str(id))
+    elif request.method == 'GET':
+        form.amount.data = '1000'
+    return render_template("us_amount.html",form=form)
+
+
+@app.route('/us_elderpayment/<int:id>')
+def us_elderpayment(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Addelder.query.get_or_404(id)
+    return render_template('us_elderpayment.html',user=user,form1 =form1,form2=form2)
+
+
+@app.route('/eldercreditcard/<int:id>',methods = ['GET','POST'])
+@login_required
+def eldercreditcard(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Addelder.query.get_or_404(id)
+    admission='elder'
+    if form1.validate_on_submit():
+        user.payment = 'credit card'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form1.validate_on_submit():
+        credit = Credit(userid = current_user.id,admission='elder',admissionid=user.id,name = form1.name.data,card= form1.number.data ,cvv=form1.cvv.data , expdate=form1.date.data,amount = user.amount)
+        db.session.add(credit)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_elderpayment.html',form1 =form1,form2=form2)
+
+@app.route('/elderpaypal/<int:id>',methods = ['GET','POST'])
+@login_required
+def elderpaypal(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Addelder.query.get_or_404(id)
+    admission='elder'
+    if form2.validate_on_submit():
+        user.payment = 'paypal'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form2.validate_on_submit():
+        pay = Pay(userid = current_user.id,admission='elder',admissionid=user.id,name = form2.name.data,card= form2.number.data ,cvv=form2.cvv.data , validdate=form2.date.data,amount = user.amount)
+        db.session.add(pay)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_elderpayment.html',form1 =form1,form2=form2)
+
+
+
+@app.route('/us_healthamount/<int:id>',methods = ['GET','POST'])
+def us_healthamount(id):
+    form=Amountform()
+    health = Member.query.get_or_404(id)
+    if form.validate_on_submit():
+        health.amount = '1000'
+        db.session.commit()
+        return redirect('/us_healthpayment/'+str(id))
+    elif request.method == 'GET':
+        form.amount.data = '1000'
+    return render_template("us_amount.html",form=form)
+
+@app.route('/us_healthpayment/<int:id>')
+def us_healthpayment(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Member.query.get_or_404(id)
+    return render_template('us_healthpayment.html',user=user,form1 =form1,form2=form2)
+
+
+@app.route('/healthcreditcard/<int:id>',methods = ['GET','POST'])
+@login_required
+def healthcreditcard(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Member.query.get_or_404(id)
+    admission = 'health'
+    if form1.validate_on_submit():
+        user.payment = 'credit card'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form1.validate_on_submit():
+        credit = Credit(userid = current_user.id,admission='health',admissionid=user.id,name = form1.name.data,card= form1.number.data ,cvv=form1.cvv.data , expdate=form1.date.data,amount = user.amount)
+        db.session.add(credit)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_healthpayment.html',form1 =form1,form2=form2)
+
+@app.route('/healthpaypal/<int:id>',methods = ['GET','POST'])
+@login_required
+def healthpaypal(id):
+    form1 = Creditcard()
+    form2 = Paypal()
+    user = Member.query.get_or_404(id)
+    admission = 'health'
+    if form2.validate_on_submit():
+        user.payment = 'paypal'
+        user.paymentstatus = 'completed'
+        sendmail(admission)
+        db.session.commit()
+    if form2.validate_on_submit():
+        pay = Pay(userid = current_user.id,admission='health',admissionid=user.id,name = form2.name.data,card= form2.number.data ,cvv=form2.cvv.data , validdate=form2.date.data,amount = user.amount)
+        db.session.add(pay)
+        db.session.commit()
+        return redirect('/successfull')
+    return render_template('us_healthpayment.html',form1 =form1,form2=form2)
+
+
+def sendmail(admission):
+    msg = Message('successful',
+                  recipients=[current_user.email])
+    msg.body = f'''Your {admission} Admission Successfully Completed.... And Transactions Completed Successfully..  '''
+    mail.send(msg)
+
+
+
+@app.route('/successfull')
+def successfull():
+    return render_template("successfull.html")

@@ -26,6 +26,17 @@
     <!--//stylesheets-->
     <link href=".//fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible" role="alert" style="font-size: 1.5rem;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <!-- <strong>Title</strong> --> {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
   </head>
   
   <body>
@@ -53,7 +64,7 @@
               <a href="/d_feedback">Feedback</a>
             </li>
             <li>
-                <a href="">Logout</a>
+                <a href="/logout">Logout</a>
               </li>
           </ul>
         </nav>

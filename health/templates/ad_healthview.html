@@ -1,0 +1,48 @@
+{%extends 'ad_layout.html'%}
+{%block content%}
+
+<div class="col-12" style="    left: 267px;
+max-width: 74%;">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title"></h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+        <thead>
+        <tr role="row">
+          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Id</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Name</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Address</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Course</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Time</th>   
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Payment Method</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"></th>
+        </tr>
+        
+        </thead>
+        <tbody>
+          {%for t in t %}
+          <tr role="row" class="odd">
+          <td class="sorting_1">{{t.id}}</td>
+          <td>{{t.name}}</td>
+          <td>{{t.address}}</td>
+          <td>{{t.course}}</td>
+          <td>{{t.time}}</td>
+          <td>{{t.payment}}</td>
+          <td>{{t.status}}</td>
+          <td><a href="/healthapprove/{{t.id}}"><Button>Approve</Button></a> 
+               <a href="/healthreject/{{t.id}}"><Button>Reject</Button></a></td>
+    
+          </tr>
+           {%endfor%}
+        </tbody>
+       
+      </table></div></div><div class="row"></div></div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+</div>
+{%endblock%}

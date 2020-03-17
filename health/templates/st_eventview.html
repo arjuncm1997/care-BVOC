@@ -42,6 +42,7 @@
     <th>Eventdate</th>
     <th>Eventtime</th>
     <th>Eventtype</th>
+    <th></th>
   </tr>
   <tbody>
     {%for o in o %}
@@ -50,6 +51,7 @@
     <td>{{o.eventdate}}</td>
     <td>{{o.eventtime}}</td>
     <td>{{o.eventtype}}</td>
+    <td><a href="/editevent/{{o.id}}"><button style="color: green;">Edit</button></a>  <a href="/delevent/{{o.id}}"><button style="color: red;">Delete</button></a></td>
      </tr>
      {%endfor%}</tbody>
   

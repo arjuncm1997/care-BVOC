@@ -7,37 +7,87 @@ left: 313px;">
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form action="/ad_staff" method='POST' role="form">
+    <form action="" method='POST' role="form">
+      {{ form.hidden_tag() }}
       <div class="card-body">
         <div class="form-group">
             <label for="exampleInputName">Full name</label>
-            <input type="text"name="name" class="form-control" id="exampleInputName" placeholder="Enter name">
+            {% if form.name.errors %}
+             {{ form.name(class="form-control form-control-lg is-invalid") }}
+             <div class="invalid-feedback">
+              {% for error in form.name.errors %}
+            <span>{{ error }}</span>
+                       {% endfor %}
+                  </div>
+             {% else %}
+                {{ form.name(class="form-control form-control-lg") }}
+           {% endif %}
           </div>
           <div class="form-group">
             <label for="exampleInputAge">Age</label>
-            <input type="text"name="age" class="form-control" id="exampleInputAge" placeholder="Enter age">
-          </div>
+            {% if form.age.errors %}
+            {{ form.age(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+             {% for error in form.age.errors %}
+           <span>{{ error }}</span>
+                      {% endfor %}
+                 </div>
+            {% else %}
+               {{ form.age(class="form-control form-control-lg") }}
+          {% endif %}
           <div class="form-group">
             <label for="exampleInputAddress">Address</label>
-            <input type="text"name="add" class="form-control" id="exampleInputAddress" placeholder="Enter address">
+            {% if form.add.errors %}
+             {{ form.add(class="form-control form-control-lg is-invalid") }}
+             <div class="invalid-feedback">
+              {% for error in form.add.errors %}
+            <span>{{ error }}</span>
+                       {% endfor %}
+                  </div>
+             {% else %}
+                {{ form.add(class="form-control form-control-lg") }}
+           {% endif %}
           </div>
           <div class="form-group">
             <label for="exampleInputQualification">Qualification</label>
-            <input type="text"name="quali"class="form-control" id="exampleInputQualification" placeholder="Enter Qualification">
+            {% if form.quali.errors %}
+            {{ form.quali(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+             {% for error in form.quali.errors %}
+           <span>{{ error }}</span>
+                      {% endfor %}
+                 </div>
+            {% else %}
+               {{ form.quali(class="form-control form-control-lg") }}
+          {% endif %}
           </div>
           <div class="form-group">
             <label for="exampleInputExperience">Experience</label>
-            <input type="text"name="experi" class="form-control" id="exampleInputExperience" placeholder="Enter your Experience">
+            {% if form.exp.errors %}
+            {{ form.exp(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+             {% for error in form.exp.errors %}
+           <span>{{ error }}</span>
+                      {% endfor %}
+                 </div>
+            {% else %}
+               {{ form.exp(class="form-control form-control-lg") }}
+          {% endif %}
           </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email"name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          {% if form.email.errors %}
+             {{ form.email(class="form-control form-control-lg is-invalid") }}
+             <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+                       {% endfor %}
+                  </div>
+             {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+           {% endif %}
         </div>
         
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
       </div>
       <!-- /.card-body -->
 
