@@ -480,6 +480,15 @@ ul.short_ls li {
   -ms-background-size: cover;
   min-height: 800px;
 }
+.main-topst {
+    background: url(../images/b5.jpg) no-repeat bottom;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height: 800px;
+  }
 .headder-top {
     position: absolute;
     width: 100%;
@@ -781,6 +790,10 @@ line-height: 38px;
 .main-top {
     min-height: 680px;
 }
+@media(max-width:1440px){
+    .main-topst {
+        min-height: 680px;
+    }
 .style-banner {
     padding-top: 16em;
     padding-right: 3em;
@@ -850,6 +863,10 @@ font-size: 2.7em;
 .main-top {
     min-height: 600px;
 }
+@media(max-width:1280px){
+    .main-topst {
+        min-height: 600px;
+    }
 .two-demo-button p {
     padding-left: 25em;
     line-height: 25px;
@@ -948,6 +965,10 @@ nav ul li a {
 .main-top {
     min-height: 570px;
 }
+@media(max-width:1024px){
+    .main-topst {
+        min-height: 570px;
+    }
 .style-banner {
     padding-top: 11em;
 }
@@ -1032,6 +1053,9 @@ nav ul li a {
     padding-left: 13em;
 }
 .main-top {
+    min-height: 500px;
+}
+.main-topst {
     min-height: 500px;
 }
 .social-icons ul li {
@@ -1138,6 +1162,10 @@ button.btn1 {
 .main-top {
     min-height: 461px;
 }
+@media(max-width:736px){
+    .main-topst {
+        min-height: 461px;
+    }
 .style-banner {
     padding-right: 1em;
 }
@@ -1270,6 +1298,10 @@ font-size: 15px;
 .main-top {
     min-height: 435px;
 }
+@media(max-width:480px){
+    .main-topst {
+        min-height: 435px;
+    }
 .style-banner {
     padding-top: 7em;
 }
@@ -1332,6 +1364,9 @@ h3.title {
     line-height: 30px;
 }
 .main-top {
+    min-height: 406px;
+}	
+.main-topst {
     min-height: 406px;
 }	
 .popup {

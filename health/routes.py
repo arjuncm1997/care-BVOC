@@ -1,5 +1,5 @@
 import os
-from flask import Flask,render_template,request,redirect,flash
+from flask import Flask,render_template,request,redirect,flash,url_for
 from flask_sqlalchemy import SQLAlchemy
 from health import app,db,bcrypt, mail
 from health.models import Registration
@@ -18,6 +18,7 @@ def p_layout():
     return render_template('index.html')
     
 @app.route('/userlayout')
+@login_required
 def userlayout():
     return render_template('userlayout.html')
     
@@ -32,6 +33,7 @@ def layout():
     return render_template('layout.html')
 
 @app.route('/u_feedback',methods=['POST','GET'])
+@login_required
 def u_feedback():
     if request.method == 'POST':
         com=request.form['message']
@@ -46,6 +48,7 @@ def u_feedback():
     return render_template('u_feedback.html')
 
 @app.route('/d_feedback',methods=['POST','GET'])
+@login_required
 def d_feedback():
     if request.method == 'POST':
         com=request.form['message']
@@ -61,6 +64,7 @@ def d_feedback():
     return render_template('d_feedback.html')
 
 @app.route('/st_feedback',methods=['POST','GET'])
+@login_required
 def st_feedback():
     if request.method == 'POST':
         com=request.form['message']
@@ -112,12 +116,14 @@ def reg():
 
 
 @app.route('/u_layout')
+@login_required
 def u_layout():
     return render_template('u_layout.html')
 
 
 
 @app.route('/us_kidadview')
+@login_required
 def kidadview():
     s = Kids.query.filter_by(ownerid=current_user.id).all()
     return render_template('us_kidadview.html',s=s)
@@ -125,6 +131,7 @@ def kidadview():
 
 
 @app.route('/us_elderadview')
+@login_required
 def elderadview():
     s = Addelder.query.filter_by(ownerid=current_user.id).all()
     return render_template('us_elderadview.html',s=s)
@@ -132,21 +139,16 @@ def elderadview():
 
 
 @app.route('/us_memberview')
+@login_required
 def memberview():
     s = Member.query.filter_by(ownerid=current_user.id).all()
     return render_template('us_memberview.html',s=s)
 
 
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-    
-
-
-
 
 @app.route('/donation',methods=['POST','GET'])
+@login_required
 def donation():
     if request.method =='POST':
         na=request.form['name']
@@ -163,10 +165,12 @@ def donation():
     return render_template('donation.html')
 
 @app.route('/u_service')
+@login_required
 def u_service():
     return render_template('u_service.html')
 
 @app.route('/elderregistration',methods=['POST','GET'])
+@login_required
 def elder():
     if request.method == 'POST':
         b =request.form['name']
@@ -187,6 +191,7 @@ def elder():
 
 
 @app.route('/kids',methods=['POST','GET'])
+@login_required
 def kid():
     if request.method == 'POST':
         a =request.form['name']
@@ -207,6 +212,7 @@ def kid():
 
 
 @app.route('/member',methods=['POST','GET'])
+@login_required
 def mem():
     if request.method == 'POST':
         a =request.form['name']
@@ -250,7 +256,7 @@ def login():
         if user3 and user3.password== form.password.data:
             login_user(user3, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect('/ad_layout')
+            return redirect(next_page) if next_page else redirect('/adminlayout')
 
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -271,6 +277,7 @@ def service():
 
 
 @app.route('/us_eventview')
+@login_required
 def eventview():
     s = Addevent.query.filter_by(status='approved').all()
     return render_template('us_eventview.html',s=s)
@@ -280,11 +287,17 @@ def eventview():
 
 
 @app.route('/ad_layout')
+@login_required
 def admin():
     return render_template('ad_layout.html')
 
+@app.route('/adminlayout')
+@login_required
+def adminlayout():
+    return render_template("adminlayout.html")
 
 @app.route('/ad_kidview')
+@login_required
 def kidview():
     t = Kids.query.all()
     return render_template('ad_kidview.html',t=t)
@@ -305,6 +318,7 @@ def kidreject(id):
     return redirect('/ad_kidview')
 
 @app.route('/ad_elderview')
+@login_required
 def ad_elderview():
     t = Addelder.query.all()
     return render_template('ad_elderview.html',t=t)
@@ -326,6 +340,7 @@ def elderreject(id):
 
 
 @app.route('/ad_healthview')
+@login_required
 def ad_healthview():
     t = Member.query.all()
     return render_template('ad_healthview.html',t=t)
@@ -347,26 +362,31 @@ def healthreject(id):
 
 
 @app.route('/ad_viewcontp')
+@login_required
 def ad_viewcontp():
     a = Contact.query.filter_by(usertype='public').all()
     return render_template('ad_viewcontp.html',a=a)
 
 @app.route('/ad_viewcontd')
+@login_required
 def ad_viewcontd():
     a = Contact.query.filter_by(usertype='docter').all()
     return render_template('ad_viewcontd.html',a=a)
 
 @app.route('/ad_viewconts')
+@login_required
 def ad_viewconts():
     a = Contact.query.filter_by(usertype='staff').all()
     return render_template('ad_viewconts.html',a=a)
 
 @app.route('/ad_viewcontu')
+@login_required
 def ad_viewcontu():
     a = Contact.query.filter_by(usertype='user').all()
     return render_template('ad_viewcontu.html',a=a)
 
 @app.route('/ad_staff',methods=['POST','GET'])
+@login_required
 def viewstaff():
     form = StaffForm()
     if form.validate_on_submit():
@@ -398,6 +418,7 @@ def staffadd(f,e):
     mail.send(msg) 
 
 @app.route('/ad_staffedit/<int:id>',methods=['POST','GET'])
+@login_required
 def ad_staffedit(id):
     form = StaffeditForm()
     staff = Addstaff.query.get_or_404(id)
@@ -439,6 +460,7 @@ def staffdelete(id):
     return redirect('/ad_viewst')
 
 @app.route('/ad_docter',methods=['POST','GET'])
+@login_required
 def adddocter():
     form = DocterForm()
     if form.validate_on_submit():
@@ -472,6 +494,7 @@ def docteradd(f,e):
     mail.send(msg) 
 
 @app.route('/ad_docteredit/<int:id>',methods=['POST','GET'])
+@login_required
 def ad_docteredit(id):
     form = DoctereditForm()
     docter = Adddocter.query.get_or_404(id)
@@ -514,6 +537,7 @@ def docterdelete(id):
 
 
 @app.route('/ad_viewdoc')
+@login_required
 def viewdoc():
     c = Adddocter.query.all()
     return render_template('ad_viewdoc.html',c=c)
@@ -521,28 +545,33 @@ def viewdoc():
 
 
 @app.route('/ad_user')
+@login_required
 def aduser():
     user = Login.query.filter_by(usertype = 'user').all()
     return render_template('ad_user.html', user= user)
 
 
 @app.route('/ad_viewst')
+@login_required
 def adstview():
     d = Addstaff.query.all()
     return render_template('ad_viewst.html',d=d)
 
 
 @app.route('/ad_eventview')
+@login_required
 def viewevent():
     q = Addevent.query.filter_by(status='').all()
     return render_template('ad_eventview.html',q=q)
 
 @app.route('/ad_approvedevents')
+@login_required
 def ad_approvedevents():
     q = Addevent.query.filter_by(status='approved').all()
     return render_template('ad_approvedevents.html',q=q)
 
 @app.route('/ad_rejectedevents')
+@login_required
 def ad_rejectedevents():
     q = Addevent.query.filter_by(status='rejected').all()
     return render_template('ad_rejectedevents.html',q=q)
@@ -575,29 +604,35 @@ def eventreject(id):
 
 
 @app.route('/staff_layout')
+@login_required
 def stafflay():
     return render_template('staff_layout.html')
 
     
 @app.route('/regview')
+@login_required
 def regview():
     f = Registration.query.all()
     return render_template('regview.html',f=f)
 
 
 @app.route('/st_kidsview')
+@login_required
 def st_kidsview():
     a = Kids.query.all()
     return render_template('st_kidsview.html',a=a)
 
 
+
 @app.route('/st_elder')
+@login_required
 def st_elder():
     x = Addelder.query.all()
     return render_template('st_elder.html',x=x)
 
 
 @app.route('/st_memberview')
+@login_required
 def st_memberview():
     y = Member.query.all()
     return render_template('st_memberview.html',y=y)
@@ -607,6 +642,7 @@ def st_memberview():
 
 
 @app.route('/st_eventview')
+@login_required
 def st_eventview():
     o = Addevent.query.filter_by(ownerid=current_user.id).all()
     return render_template('st_eventview.html',o=o)
@@ -614,6 +650,7 @@ def st_eventview():
 
 
 @app.route('/addevent',methods=['POST','GET'])
+@login_required
 def events():
     staff=""
     staff1 = ""
@@ -637,6 +674,7 @@ def events():
 
 
 @app.route('/editevent/<int:id>',methods=['POST','GET'])
+@login_required
 def editevent(id):
     event = Addevent.query.get_or_404(id)
     staff=""
@@ -667,11 +705,13 @@ def delevent(id):
 
 
 @app.route('/docter_layout')
+@login_required
 def docterlay():
     return render_template('docter_layout.html')
 
 
 @app.route('/doc_view')
+@login_required
 def docview():
     s = Patientdetails.query.all()
     return render_template('doc_view.html',s=s)
@@ -686,6 +726,7 @@ def docdel(id):
 
 
 @app.route('/doc_adddetails',methods=['POST','GET'])
+@login_required
 def doc_adddetails():
     if request.method == 'POST':
         a =request.form['name']
@@ -705,6 +746,7 @@ def doc_adddetails():
 
 
 @app.route('/doc_editdetails/<int:id>',methods=['POST','GET'])
+@login_required
 def doc_editdetails(id):
     det = Patientdetails.query.get_or_404(id)
     if request.method == 'POST':
@@ -718,6 +760,7 @@ def doc_editdetails(id):
     return render_template('doc_editdetails.html',det=det)
 
 @app.route('/ad_gallery',methods=['POST','GET'])
+@login_required
 def ad_gallery():
     form = Imageform()
     if form.validate_on_submit():
@@ -737,11 +780,13 @@ def ad_gallery():
     return render_template('ad_gallery.html', form = form)
 
 @app.route('/ad_viewimage')
+@login_required
 def ad_viewimage():
     d = Gallery.query.all()
     return render_template("ad_viewimage.html", d=d)
 
 @app.route("/ad_galleryupdate/<int:id>", methods=['GET', 'POST'])
+@login_required
 def ad_galleryupdate(id):
     gallery = Gallery.query.get_or_404(id)
     form = Imageform()
@@ -784,6 +829,7 @@ def save_picture(form_picture):
 
 
 @app.route('/uchat/<int:id>', methods=['GET', 'POST'])
+@login_required
 def uchat(id):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -804,11 +850,13 @@ def uchat(id):
     return render_template("uchat.html",chat=chat)
 
 @app.route('/u_chatselect')
+@login_required
 def u_chatselect():
     user = Login.query.filter_by(usertype='staff').all()
     return render_template("u_chatselect.html",user=user)
 
 @app.route('/st_chatselect')
+@login_required
 def st_chatselect():
     user = Login.query.filter_by(usertype='user').all()
     chat = Chat.query.all()
@@ -816,6 +864,7 @@ def st_chatselect():
 
 
 @app.route('/stchat/<int:id>', methods=['GET', 'POST'])
+@login_required
 def stchat(id):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -841,6 +890,7 @@ def stchat(id):
 
 
 @app.route('/us_payment/<int:id>')
+@login_required
 def us_payment(id):
     form1 = Creditcard()
     form2 = Paypal()
@@ -888,6 +938,7 @@ def paypal(id):
 
 
 @app.route('/us_amount/<int:id>',methods = ['GET','POST'])
+@login_required
 def us_amount(id):
     form=Amountform()
     kid = Kids.query.get_or_404(id)
@@ -901,6 +952,7 @@ def us_amount(id):
 
 
 @app.route('/us_elderamount/<int:id>',methods = ['GET','POST'])
+@login_required
 def us_elderamount(id):
     form=Amountform()
     elder = Addelder.query.get_or_404(id)
@@ -914,6 +966,7 @@ def us_elderamount(id):
 
 
 @app.route('/us_elderpayment/<int:id>')
+@login_required
 def us_elderpayment(id):
     form1 = Creditcard()
     form2 = Paypal()
@@ -962,6 +1015,7 @@ def elderpaypal(id):
 
 
 @app.route('/us_healthamount/<int:id>',methods = ['GET','POST'])
+@login_required
 def us_healthamount(id):
     form=Amountform()
     health = Member.query.get_or_404(id)
@@ -974,6 +1028,7 @@ def us_healthamount(id):
     return render_template("us_amount.html",form=form)
 
 @app.route('/us_healthpayment/<int:id>')
+@login_required
 def us_healthpayment(id):
     form1 = Creditcard()
     form2 = Paypal()
@@ -1029,5 +1084,165 @@ def sendmail(admission):
 
 
 @app.route('/successfull')
+@login_required
 def successfull():
     return render_template("successfull.html")
+
+
+@app.route('/us_profile',methods = ['GET','POST'])
+@login_required
+def us_profile():
+    form = Accountform()
+    reg = Registration.query.filter_by(email = current_user.email).first()
+
+    if form.validate_on_submit():
+        if form.pic.data:
+            picture_file = save_picture(form.pic.data)
+            current_user.image = picture_file
+        current_user.username = form.name.data
+        current_user.email = form.email.data
+        reg.username = form.name.data
+        reg.email = form.email.data
+        db.session.commit() 
+    elif request.method == 'GET':
+        form.name.data = reg.username
+        form.email.data = reg.email
+    return render_template("us_profile.html",form=form)
+
+
+@app.route('/st_profile',methods = ['GET','POST'])
+@login_required
+def st_profile():
+    form = Accountformstaff()
+    staff = Addstaff.query.filter_by(email = current_user.email).first()
+
+    if form.validate_on_submit():
+        if form.pic.data:
+            picture_file = save_picture(form.pic.data)
+            current_user.image = picture_file
+            staff.img = picture_file
+        current_user.username = form.name.data
+        current_user.email = form.email.data
+        staff.name = form.name.data
+        staff.email = form.email.data
+        staff.age = form.age.data
+        staff.experience = form.exp.data
+        staff.address = form.add.data
+        staff.qualification = form.quali.data
+        db.session.commit() 
+    elif request.method == 'GET':
+        form.name.data = staff.name
+        form.email.data = staff.email
+        form.age.data = staff.age
+        form.exp.data = staff.experience
+        form.add.data = staff.address
+        form.quali.data = staff.qualification
+    return render_template("st_profile.html",form=form)
+
+@app.route('/d_profile',methods = ['GET','POST'])
+@login_required
+def d_profile():
+    form = Accountformdocter()
+    docter = Adddocter.query.filter_by(email = current_user.email).first()
+
+    if form.validate_on_submit():
+        if form.pic.data:
+            picture_file = save_picture(form.pic.data)
+            current_user.image = picture_file
+            docter.img = picture_file
+        current_user.username = form.name.data
+        current_user.email = form.email.data
+        docter.name = form.name.data
+        docter.email = form.email.data
+        docter.age = form.age.data
+        docter.Qualification = form.quali.data
+        docter.specilizedarea = form.speci.data
+        docter.doctertype = form.dtype.data
+        db.session.commit() 
+    elif request.method == 'GET':
+        form.name.data = docter.name
+        form.email.data = docter.email
+        form.age.data = docter.age
+        form.quali.data = docter.Qualification
+        form.speci.data = docter.specilizedarea
+        form.dtype.data = docter.doctertype
+    return render_template("d_profile.html",form=form)
+
+
+@app.route('/d_changepassword', methods=['GET', 'POST'])
+@login_required
+def d_changepassword():
+    form = Changepassword()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        current_user.password = hashed_password
+        db.session.commit()
+        logout_user()
+        flash('Your Password Has Been Changed')
+        return redirect('/signin') 
+    return render_template('d_changepassword.html', form=form)
+
+
+@app.route('/us_changepassword', methods=['GET', 'POST'])
+@login_required
+def us_changepassword():
+    form = Changepassword()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        current_user.password = hashed_password
+        db.session.commit()
+        logout_user()
+        flash('Your Password Has Been Changed')
+        return redirect('/signin') 
+    return render_template('us_changepassword.html', form=form)
+
+@app.route('/st_changepassword', methods=['GET', 'POST'])
+@login_required
+def st_changepassword():
+    form = Changepassword()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        current_user.password = hashed_password
+        db.session.commit()
+        logout_user()
+        flash('Your Password Has Been Changed')
+        return redirect('/signin') 
+    return render_template('st_changepassword.html', form=form)
+
+
+@app.route('/resetrequest', methods=['GET','POST'])
+def resetrequest():
+    form = Reset()
+    if form.validate_on_submit():
+        user = Login.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password.', 'info')
+        return redirect('/resetrequest')
+    return render_template("resetrequest.html",form = form)
+
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request',
+                  recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('resettoken', token=token, _external=True)}
+
+If you did not make this request then simply ignore this email and no changes will be made.
+'''
+    mail.send(msg)
+
+@app.route("/resetpassword/<token>", methods=['GET', 'POST'])
+def resettoken(token):
+    user = Login.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect('/resetrequest')
+    form = Changepassword()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Your password has been updated! You are now able to log in', 'success')
+        return redirect('/signin')
+    return render_template('resetpassword.html', title='Reset Password', form=form)
